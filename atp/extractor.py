@@ -10,5 +10,3 @@ class Extractor(BaseJob):
     def __init__(self, tournament: str, session: requests.Session = None):
         super().__init__(tournament=tournament)
         self.session = session or requests.Session()
-
-
