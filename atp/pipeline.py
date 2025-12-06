@@ -1,5 +1,6 @@
 import argparse
 
+from extractor import Extractor
 from loader import get_tournament_by_id
 
 
@@ -15,7 +16,7 @@ def parse_args():
     parser.add_argument(
         "--tour",
         required=True,
-        help="ATP of CH",
+        help="ATP or CH",
     )
     parser.add_argument("--tid", required=False, help="Tournament ID")
 
@@ -26,15 +27,14 @@ def parse_args():
 
 def main():
     args = parse_args()
-
     tournament = get_tournament_by_id(
         year=args.year,
         tour=args.tour,
         tournament_id=args.tid,
     )
-    import json
 
-    print(json.dumps(tournament, indent=4))
+    extractor = Extractor(tournament=tournament)
+    extractor.run()
 
 
 if __name__ == "__main__":
